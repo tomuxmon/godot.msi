@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+    <Product Id="d6de4af2-4375-4d34-9598-591008267859" Name="Godot Engine Tools" Version="3.0.0.0" Manufacturer="Godot Engine" Language="1033" UpgradeCode="77b73dc6-24ab-4714-9c76-2e2b17336f08">
+        <!--<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited" /> -->
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+        <MajorUpgrade DowngradeErrorMessage="A newer version of Godot Engine Tools is already installed." IgnoreRemoveFailure="no" />
+        <Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high" />        
+        <!-- mandatory root directory -->
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="APPROOTDIR" Name="Godot"/>
+            </Directory>
+        </Directory>
+        <DirectoryRef Id="APPROOTDIR">
+            <Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
+                <File Id="godot.exe" Source="godot.windows.tools.64.exe" KeyPath="yes" Checksum="yes"/>
+            </Component>
+        </DirectoryRef>
+        <Feature Id="godot_tools" Title="Godot Tools" Level="1">
+            <ComponentRef Id="editor" />
+        </Feature>
+    </Product>
+</Wix>
