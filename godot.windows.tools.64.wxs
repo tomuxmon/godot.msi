@@ -3,11 +3,17 @@
 	<Product Id="d6de4af2-4375-4d34-9598-591008267859" Name="Godot" Version="3.0.0.0" Manufacturer="Godot" Language="1033" UpgradeCode="77b73dc6-24ab-4714-9c76-2e2b17336f08">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of Godot is already installed." IgnoreRemoveFailure="no" />
-		<Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high" />        
+		<Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high" />
+		<!-- defines icon in add remove programs -->
+		<Property Id="ARPPRODUCTICON" Value="godot.ico" />
 		<!-- mandatory root directory -->
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="LocalAppDataFolder">
 				<Directory Id="APPROOTDIR" Name="Godot"/>
+			</Directory>
+			<!-- Special folder for start menu folder-->
+			<Directory Id="ProgramMenuFolder" Name="ProgramsMenu">
+				<Directory Id="menu_shortcut_dir" Name="Godot" />
 			</Directory>
 		</Directory>
 		<DirectoryRef Id="APPROOTDIR">
@@ -17,8 +23,17 @@
 				<RemoveFolder Id="APPROOTDIR" On="uninstall" />
 			</Component>
 		</DirectoryRef>
+		<DirectoryRef Id="menu_shortcut_dir">
+			<Component Id="menu_shortcut_component" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
+				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsMenuShortcutInstalled" Value="1" KeyPath="yes" />
+				<Shortcut Id="menu_shortcut" Directory="menu_shortcut_dir" Name="Godot" Icon="godot.ico" Target="[#godot.exe]"/>
+				<RemoveFolder Id="menu_shortcut_dir" On="uninstall" />
+			</Component>
+		</DirectoryRef>
+		<Icon Id="godot.ico" SourceFile="godot.ico" />
 		<Feature Id="godot_editor" Title="Godot Editor" Level="1">
 			<ComponentRef Id="editor" />
+			<ComponentRef Id="menu_shortcut_component" />			
 		</Feature>
 	</Product>
 </Wix>
