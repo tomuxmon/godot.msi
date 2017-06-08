@@ -12,9 +12,7 @@
 				<Directory Id="APPROOTDIR" Name="Godot"/>
 			</Directory>
 			<!-- Special folder for start menu folder-->
-			<Directory Id="ProgramMenuFolder" Name="programs_menu">
-				<Directory Id="menu_shortcut_dir" Name="Godot" />
-			</Directory>
+			<Directory Id="ProgramMenuFolder" Name="start_menu" />
 			<!-- Special folder for your desktop-->
 			<Directory Id="DesktopFolder" Name="desktop" />
 		</Directory>
@@ -25,11 +23,10 @@
 				<RemoveFolder Id="APPROOTDIR" On="uninstall" />
 			</Component>
 		</DirectoryRef>
-		<DirectoryRef Id="menu_shortcut_dir">
+		<DirectoryRef Id="ProgramMenuFolder">
 			<Component Id="start_menu_shortcut" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
 				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsMenuShortcutInstalled" Value="1" KeyPath="yes" />
 				<Shortcut Id="menu_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
-				<RemoveFolder Id="menu_shortcut_dir" On="uninstall" />
 			</Component>
 		</DirectoryRef>
 		<DirectoryRef Id="DesktopFolder">
