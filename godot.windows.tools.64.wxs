@@ -12,9 +12,11 @@
 				<Directory Id="APPROOTDIR" Name="Godot"/>
 			</Directory>
 			<!-- Special folder for start menu folder-->
-			<Directory Id="ProgramMenuFolder" Name="ProgramsMenu">
+			<Directory Id="ProgramMenuFolder" Name="programs_menu">
 				<Directory Id="menu_shortcut_dir" Name="Godot" />
 			</Directory>
+			<!-- Special folder for your desktop-->
+			<Directory Id="DesktopFolder" Name="desktop" />
 		</Directory>
 		<DirectoryRef Id="APPROOTDIR">
 			<Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
@@ -24,16 +26,23 @@
 			</Component>
 		</DirectoryRef>
 		<DirectoryRef Id="menu_shortcut_dir">
-			<Component Id="menu_shortcut_component" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
+			<Component Id="start_menu_shortcut" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
 				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsMenuShortcutInstalled" Value="1" KeyPath="yes" />
-				<Shortcut Id="menu_shortcut" Directory="menu_shortcut_dir" Name="Godot" Icon="godot.ico" Target="[#godot.exe]"/>
+				<Shortcut Id="menu_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
 				<RemoveFolder Id="menu_shortcut_dir" On="uninstall" />
 			</Component>
 		</DirectoryRef>
+		<DirectoryRef Id="DesktopFolder">
+			<Component Id="desktop_shortcut" Guid="b69e7c05-8a32-4faf-bf8d-c2805cf7d3ab">
+				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsDesktopShortcutInstalled" Value="1" KeyPath="yes" />
+				<Shortcut Id="desk_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
+			</Component>
+		</DirectoryRef>		
 		<Icon Id="godot.ico" SourceFile="godot.ico" />
 		<Feature Id="godot_editor" Title="Godot Editor" Level="1">
 			<ComponentRef Id="editor" />
-			<ComponentRef Id="menu_shortcut_component" />			
+			<ComponentRef Id="start_menu_shortcut" />			
+			<ComponentRef Id="desktop_shortcut" />			
 		</Feature>
 	</Product>
 </Wix>
