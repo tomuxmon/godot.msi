@@ -34,12 +34,16 @@
 				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsDesktopShortcutInstalled" Value="1" KeyPath="yes" />
 				<Shortcut Id="desk_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
 			</Component>
-		</DirectoryRef>		
+		</DirectoryRef>
 		<Icon Id="godot.ico" SourceFile="godot.ico" />
 		<Feature Id="godot_editor" Title="Godot Editor" Level="1">
 			<ComponentRef Id="editor" />
-			<ComponentRef Id="start_menu_shortcut" />			
-			<ComponentRef Id="desktop_shortcut" />			
+			<ComponentRef Id="start_menu_shortcut" />
+			<ComponentRef Id="desktop_shortcut" />
 		</Feature>
+		<InstallExecuteSequence>
+			<Custom Action='launch_godot' After='InstallFinalize'>NOT Installed</Custom>
+		</InstallExecuteSequence>
+		<CustomAction Id="launch_godot" FileKey="godot.exe" ExeCommand="" Execute="immediate" Impersonate="yes" Return="asyncNoWait" />
 	</Product>
 </Wix>
