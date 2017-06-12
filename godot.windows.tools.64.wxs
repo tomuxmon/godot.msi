@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix 
-	xmlns="http://schemas.microsoft.com/wix/2006/wi" 
-	xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="d6de4af2-4375-4d34-9598-591008267859" Name="Godot" Version="3.0.0.0" Manufacturer="Godot" Language="1033" UpgradeCode="77b73dc6-24ab-4714-9c76-2e2b17336f08">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited"/>
-		<MajorUpgrade DowngradeErrorMessage="A newer version of Godot is already installed." IgnoreRemoveFailure="no"/>
-		<Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high"/>
-		<!-- defines icon in add remove programs -->
-		<Property Id="ARPPRODUCTICON" Value="godot.ico"/>
-		<!-- mandatory root directory -->
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="LocalAppDataFolder">
-				<Directory Id="APPROOTDIR" Name="Godot"/></Directory>
-			<!-- Special folder for start menu folder-->
-			<Directory Id="ProgramMenuFolder" Name="start_menu"/>
-			<!-- Special folder for your desktop-->
-			<Directory Id="DesktopFolder" Name="desktop"/></Directory>
-		<DirectoryRef Id="APPROOTDIR">
-			<Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
-				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsInstalled" Value="1" KeyPath="yes"/>
-				<File Id="godot.exe" Source="godot.windows.tools.64.exe" Checksum="yes"/>
-				<RemoveFolder Id="APPROOTDIR" On="uninstall"/>
-			</Component>
-		</DirectoryRef>
-		<DirectoryRef Id="ProgramMenuFolder">
-			<Component Id="start_menu_shortcut" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
-				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsMenuShortcutInstalled" Value="1" KeyPath="yes"/>
-				<Shortcut Id="menu_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
-			</Component>
-		</DirectoryRef>
-		<DirectoryRef Id="DesktopFolder">
-			<Component Id="desktop_shortcut" Guid="b69e7c05-8a32-4faf-bf8d-c2805cf7d3ab">
-				<RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsDesktopShortcutInstalled" Value="1" KeyPath="yes"/>
-				<Shortcut Id="desk_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
-			</Component>
-		</DirectoryRef>
-		<Icon Id="godot.ico" SourceFile="godot.ico"/>
-		<Feature Id="godot_editor" Title="Godot Editor" Level="1">
-			<ComponentRef Id="editor"/>
-			<ComponentRef Id="start_menu_shortcut"/>
-			<ComponentRef Id="desktop_shortcut"/>
-		</Feature>
-		<InstallExecuteSequence>
-			<Custom Action="launch_godot" After="InstallFinalize">NOT Installed</Custom>
-		</InstallExecuteSequence>
-		<CustomAction Id="launch_godot" FileKey="godot.exe" ExeCommand="" Execute="immediate" Impersonate="yes" Return="asyncNoWait"/>
-	</Product>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="d6de4af2-4375-4d34-9598-591008267859" Name="Godot" Version="3.0.0.0" Manufacturer="Godot" Language="1033" UpgradeCode="77b73dc6-24ab-4714-9c76-2e2b17336f08">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited"/>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Godot is already installed." IgnoreRemoveFailure="no"/>
+    <Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high"/>
+    <!-- defines icon in add remove programs -->
+    <Property Id="ARPPRODUCTICON" Value="godot.ico"/>
+    <!-- mandatory root directory -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="APPROOTDIR" Name="Godot"/>
+      </Directory>
+      <!-- Special folder for start menu folder-->
+      <Directory Id="ProgramMenuFolder" Name="start_menu"/>
+      <!-- Special folder for your desktop-->
+      <Directory Id="DesktopFolder" Name="desktop"/>
+    </Directory>
+    <DirectoryRef Id="APPROOTDIR">
+      <Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
+        <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsInstalled" Value="1" KeyPath="yes"/>
+        <File Id="godot.exe" Source="godot.windows.tools.64.exe" Checksum="yes"/>
+        <RemoveFolder Id="APPROOTDIR" On="uninstall"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="ProgramMenuFolder">
+      <Component Id="start_menu_shortcut" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
+        <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsMenuShortcutInstalled" Value="1" KeyPath="yes"/>
+        <Shortcut Id="menu_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="desktop_shortcut" Guid="b69e7c05-8a32-4faf-bf8d-c2805cf7d3ab">
+        <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsDesktopShortcutInstalled" Value="1" KeyPath="yes"/>
+        <Shortcut Id="desk_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
+      </Component>
+    </DirectoryRef>
+    <Icon Id="godot.ico" SourceFile="godot.ico"/>
+    <Feature Id="godot_editor" Title="Godot Editor" Level="1">
+      <ComponentRef Id="editor"/>
+      <ComponentRef Id="start_menu_shortcut"/>
+      <ComponentRef Id="desktop_shortcut"/>
+    </Feature>
+    <InstallExecuteSequence>
+      <Custom Action="launch_godot" After="InstallFinalize">NOT Installed</Custom>
+    </InstallExecuteSequence>
+    <CustomAction Id="launch_godot" FileKey="godot.exe" ExeCommand="" Execute="immediate" Impersonate="yes" Return="asyncNoWait"/>
+  </Product>
 </Wix>
