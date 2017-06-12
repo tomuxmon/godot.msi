@@ -6,6 +6,10 @@
     <Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high"/>
     <!-- defines icon in add remove programs -->
     <Property Id="ARPPRODUCTICON" Value="godot.ico"/>
+    <!-- defines preprocessor variable validation -->
+    <?ifndef exe_path ?>
+    <?error exe_path must be passed to candle like 'candle -dexe_path="godot.windows.tools.64.exe"' ?>
+    <?endif?>
     <!-- mandatory root directory -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="LocalAppDataFolder">
@@ -19,7 +23,7 @@
     <DirectoryRef Id="APPROOTDIR">
       <Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
         <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsInstalled" Value="1" KeyPath="yes"/>
-        <File Id="godot.exe" Source="godot.windows.tools.64.exe" Checksum="yes"/>
+        <File Id="godot.exe" Source="$(var.exe_path)" Checksum="yes"/>
         <RemoveFolder Id="APPROOTDIR" On="uninstall"/>
       </Component>
     </DirectoryRef>

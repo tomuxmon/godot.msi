@@ -1,0 +1,10 @@
+#intermediate build artifacts
+*.wixobj
+
+#build artifacts
+*.exe
+*.msi
+*.wixpdb
+
+#images 
+*.ico
