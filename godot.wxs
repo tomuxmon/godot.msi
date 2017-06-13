@@ -30,7 +30,7 @@
             <MIME ContentType="application/godot" Default="yes"/>
           </Extension>
         </ProgId>
-		<RemoveFolder Id="APPROOTDIR" On="uninstall"/>
+        <RemoveFolder Id="APPROOTDIR" On="uninstall"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="ProgramMenuFolder">
