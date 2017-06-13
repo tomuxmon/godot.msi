@@ -24,7 +24,13 @@
       <Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
         <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsInstalled" Value="1" KeyPath="yes"/>
         <File Id="godot.exe" Source="$(var.exe_path)" Checksum="yes"/>
-        <RemoveFolder Id="APPROOTDIR" On="uninstall"/>
+        <ProgId Id="proj.godot" Description="Godot Project File">
+          <Extension Id="godot">
+            <Verb Id="open" Command="Open" TargetFile="godot.exe" Argument="&quot;%1&quot;"/>
+            <MIME ContentType="application/godot" Default="yes"/>
+          </Extension>
+        </ProgId>
+		<RemoveFolder Id="APPROOTDIR" On="uninstall"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="ProgramMenuFolder">
