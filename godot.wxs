@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="d6de4af2-4375-4d34-9598-591008267859" Name="Godot" Version="3.0.0.0" Manufacturer="Godot" Language="1033" UpgradeCode="77b73dc6-24ab-4714-9c76-2e2b17336f08">
+  <!-- defines preprocessor variable validation -->
+  <?ifndef exe_path ?>
+  <?error exe_path must be passed to candle like 'candle -dexe_path=godot.windows.tools.64.exe' ?>
+  <?endif?>
+  <?ifndef version ?>
+  <?error version must be passed to candle like 'candle -dversion=3.0.0.0' ?>
+  <?endif?>
+  <Product Id="*" Name="Godot" Version="$(var.version)" Manufacturer="Godot" Language="1033" UpgradeCode="77B73DC6-24AB-4714-9C76-2E2B17336F08">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited"/>
     <MajorUpgrade DowngradeErrorMessage="A newer version of Godot is already installed." IgnoreRemoveFailure="no"/>
     <Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high"/>
     <!-- defines icon in add remove programs -->
     <Property Id="ARPPRODUCTICON" Value="godot.ico"/>
-    <!-- defines preprocessor variable validation -->
-    <?ifndef exe_path ?>
-    <?error exe_path must be passed to candle like 'candle -dexe_path="godot.windows.tools.64.exe"' ?>
-    <?endif?>
     <!-- mandatory root directory -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="LocalAppDataFolder">
@@ -21,7 +24,7 @@
       <Directory Id="DesktopFolder" Name="desktop"/>
     </Directory>
     <DirectoryRef Id="APPROOTDIR">
-      <Component Id="editor" Guid="22a5e8c0-b45b-4cc5-b23a-96f5f142ae50">
+      <Component Id="editor" Guid="22A5E8C0-B45B-4CC5-B23A-96F5F142AE50">
         <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsInstalled" Value="1" KeyPath="yes"/>
         <File Id="godot.exe" Source="$(var.exe_path)" Checksum="yes"/>
         <ProgId Id="proj.godot" Description="Godot Project File">
@@ -34,13 +37,13 @@
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="ProgramMenuFolder">
-      <Component Id="start_menu_shortcut" Guid="8cbb66ce-42c9-4952-95b7-a5c002fb17fb">
+      <Component Id="start_menu_shortcut">
         <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsMenuShortcutInstalled" Value="1" KeyPath="yes"/>
         <Shortcut Id="menu_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="DesktopFolder">
-      <Component Id="desktop_shortcut" Guid="b69e7c05-8a32-4faf-bf8d-c2805cf7d3ab">
+      <Component Id="desktop_shortcut">
         <RegistryValue Root="HKCU" Type="integer" Key="Software\Godot" Name="IsDesktopShortcutInstalled" Value="1" KeyPath="yes"/>
         <Shortcut Id="desk_shortcut" WorkingDirectory="APPROOTDIR" Name="Godot" Description="Godot Editor" Icon="godot.ico" Target="[#godot.exe]"/>
       </Component>
