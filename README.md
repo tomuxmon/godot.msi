@@ -13,6 +13,6 @@ To compile MSI you will need:
 
 Note that we set variable **exe_path** to be used by [preprocessor](http://wixtoolset.org/documentation/manual/v3/overview/preprocessor.html) by prefixing it with **-d**.
 
-##Important
+## Important
  * Only [Major.Minor.Build](https://msdn.microsoft.com/en-us/library/windows/desktop/aa370859(v=vs.85).aspx) version number parts matter in MSI versioning (and is limited to [0-255].[0-255].[0-65535]).
  * All [GUID's](https://msdn.microsoft.com/library/aa368767.aspx) used should be upper case.
