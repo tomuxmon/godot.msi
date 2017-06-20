@@ -13,6 +13,8 @@
     <Media Id="1" Cabinet="godot.cab" EmbedCab="yes" CompressionLevel="high"/>
     <!-- defines icon in add remove programs -->
     <Property Id="ARPPRODUCTICON" Value="godot.ico"/>
+	<!-- removes modify option in "add or remove programs" -->
+	<Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
     <!-- mandatory root directory -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="LocalAppDataFolder">
